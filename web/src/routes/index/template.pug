@@ -1,0 +1,25 @@
+<svelte:head>
+  <title>Flame – Data model and query library for Firestore.</title>
+</svelte:head>
+
+.flex.flex-col.justify-center.items-center.grid-bg.min-h-screen.w-screen
+  .flex.flex-col.items-center
+    .logo.hero
+    h1.font-normal.text-6xl.brand Flame
+    h2.mt-3.text-lg.font-normal.text-stone-500 Data model and query library for Firestore.
+  .flex.mt-10.mb-32
+    a.inline-flex.items-center(
+      href="/docs"
+      data-sveltekit-reload
+      class='bg-amber-300 hover:bg-amber-400 rounded-md pl-3 pr-4 py-2 shadow hover:pointer'
+    )
+      Fa(fw icon='{faBook}') /
+      span(class='ml-1.5') Docs
+
+    a.inline-flex.items-center(
+      href="https://github.com/waterstonelakes/flame"
+      data-sveltekit-reload
+      class='ml-4 bg-stone-900 hover:bg-stone-600 text-white rounded-md pl-3 pr-4 py-2 shadow hover:pointer'
+    )
+      Fa(fw icon='{faGithub}') /
+      span(class='ml-1.5') Code

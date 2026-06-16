@@ -1,0 +1,1467 @@
+mixin nav-h2(type, icon)
+  a(
+    class='flex font-black items-center justify-between mb-1 w-full'
+    data-sveltekit-reload
+    href!=attributes.href
+  )
+    block
+
+mixin nav-h3(type, icon)
+  a(
+    class='flex w-full items-center justify-between'
+    class='px-2 py-px mb-px rounded hover:pointer hover:bg-white'
+    class=(type == 'module') ? 'font-mono font-semibold mt-3' : ''
+    class='hover:shadow-sm'
+    data-sveltekit-reload
+    href!=attributes.href
+  )
+    block
+
+mixin nav-h4(type, icon)
+  a(
+    class='flex w-full items-center justify-between'
+    class='px-2 py-px mb-px rounded hover:pointer hover:bg-white'
+    class='hover:shadow-sm'
+    data-sveltekit-reload
+    href!=attributes.href
+  )
+    if type == 'fn'
+      .flex(class='text-[0.9375rem] leading-[1.5rem] font-medium')
+        span.font-mono.text-stone-400.font-normal .
+        span.font-mono: block
+        span.font-mono.text-stone-400.font-normal ()
+      .flex
+        if icon == 'warn'
+          Fa(fw icon='{faTriangleExclamation}' class='text-pink-400')/
+    else if type == 'new'
+      .flex(class='text-[0.9375rem] leading-[1.5rem] font-medium')
+        span.font-mono.font-semibold.text-emerald-600(class='mr-1.5') &nbsp;new
+        span.font-mono.font-normal: block
+        span.font-mono.text-stone-400.font-normal ()
+    else
+      block
+
+-
+  var L = (txt) => {
+    var map = {
+      'Access':              '#api-access',
+      'Access.fields()':     '#api-access-fields',
+      'Access.screen':       '#api-access-screen',
+      'Adapter':             '#api-adapter',
+      'Adapter.connect()':   '#api-adapter-connect',
+      'Adapter.transact()':  '#api-adapter-transact',
+      'Config':              '#api-config',
+      'Model':               '#api-model',
+      'Model.count()':       '#api-model-count',
+      'Model.create()':      '#api-model-create',
+      'Model.del()':         '#api-model-del',
+      'Model.extend()':      '#api-model-extend',
+      'Model.find()':        '#api-model-find',
+      'Model.findAll()':     '#api-model-find-all',
+      'Model.fragment()':    '#api-model-fragment',
+      'Model.get()':         '#api-model-get',
+      'Model.getAll()':      '#api-model-get-all',
+      'Model.page()':        '#api-model-page',
+      'Model.traverse()':    '#api-model-traverse',
+      'Pager':               '#api-pager',
+      'Query':               '#api-query',
+      'Record':              '#api-record',
+      'Record.destroy()':    '#api-record-destroy',
+      'Record.errors()':     '#api-record-errors',
+      'Record.obj()':        '#api-record-obj',
+      'Record.ok()':         '#api-record-ok',
+      'Record.save()':       '#api-record-save',
+      'Record.update()':     '#api-record-update',
+      'Serializer':          '#api-serializer',
+      'Serializer.fromDB()': '#api-serializer-from-db',
+      'Serializer.toDB()':   '#api-serializer-to-db',
+      'Validator':           '#api-validator',
+    };
+
+    return `<a data-sveltekit-reload href='${map[txt]}'><code>${txt}</code></a>`;
+  };
+
+Toaster/
+
+svelte:head
+  title.
+    Docs • Flame – Data model and query library for Firestore.
+
+div(class='sm:grid sm:grid-cols-[auto,auto]')
+  div(
+    class='bg-stone-100'
+    class='sm:h-screen sm:overflow-y-scroll'
+    class='p-6'
+    class='sm:grid sm:grid-cols-[auto,1fr]'
+    style='direction: rtl'
+  )
+    div(style='direction: ltr')
+      a(
+        href='/'
+        class='flex justify-center items-center h-16 mb-4 rounded-md'
+        class='hover:cursor-pointer hover:bg-white hover:shadow-sm'
+        data-sveltekit-reload
+      )
+        .logo(class='w-[48px] h-[48px]')
+
+      +nav-h2(href='#start') Getting Started
+      +nav-h3(href='#start-about') About
+      +nav-h3(href='#start-install') Install
+      +nav-h3(href='#start-connect') Connect to Firestore
+      +nav-h3(href='#start-define') Define a Model
+      +nav-h3(href='#start-create') Create a Record
+      +nav-h3(href='#start-save') Save a Document
+      +nav-h3(href='#start-query') Run a Query
+
+      .py-4
+
+      +nav-h2(href='#api') API Reference
+
+      +nav-h3('module')(href='#api-access') Access
+      +nav-h4('new')(href='#api-access-new') Access
+      +nav-h4('fn')(href='#api-access-fields') fields
+      +nav-h4('fn')(href='#api-access-screen') screen
+
+      +nav-h3('module')(href='#api-adapter') Adapter
+      +nav-h4('new')(href='#api-adapter-new') Adapter
+      +nav-h4('fn', 'warn')(href='#api-adapter-connect') connect
+      +nav-h4('fn')(href='#api-adapter-transact') transact
+
+      +nav-h3('module')(href='#api-config') Config
+      +nav-h4('new')(href='#api-config-new') Config
+
+      +nav-h3('module')(href='#api-model') Model
+      +nav-h4('new')(href='#api-model-new') Model
+      +nav-h4('fn')(href='#api-model-count') count
+      +nav-h4('fn')(href='#api-model-create') create
+      +nav-h4('fn')(href='#api-model-del') del
+      +nav-h4('fn')(href='#api-model-extend') extend
+      +nav-h4('fn')(href='#api-model-find') find
+      +nav-h4('fn')(href='#api-model-find-all') findAll
+      +nav-h4('fn')(href='#api-model-fragment') fragment
+      +nav-h4('fn')(href='#api-model-get') get
+      +nav-h4('fn')(href='#api-model-get-all') getAll
+      +nav-h4('fn')(href='#api-model-page') page
+      +nav-h4('fn')(href='#api-model-traverse') traverse
+
+      +nav-h3('module')(href='#api-pager') Pager
+      +nav-h4('new')(href='#api-pager-new') Pager
+
+      +nav-h3('module')(href='#api-query') Query
+      +nav-h4('new')(href='#api-query-new') Query
+
+      +nav-h3('module')(href='#api-record') Record
+      +nav-h4('fn')(href='#api-record-destroy') destroy
+      +nav-h4('fn')(href='#api-record-errors') errors
+      +nav-h4('fn')(href='#api-record-obj') obj
+      +nav-h4('fn')(href='#api-record-ok') ok
+      +nav-h4('fn')(href='#api-record-save') save
+      +nav-h4('fn')(href='#api-record-update') update
+
+      +nav-h3('module')(href='#api-serializer') Serializer
+      +nav-h4('new')(href='#api-serializer-new') Serializer
+
+      +nav-h3('module')(href='#api-validator') Validator
+      +nav-h4('new')(href='#api-validator-new') Validator
+
+      .pb-20
+    div
+
+  div(class='docs sm:h-screen sm:overflow-y-scroll bg-stone-100')
+    div(class='max-w-[800px] p-6 bg-white border border-stone-200 docs')
+      h1.text-5xl.brand.pt-2
+        span.
+          Flame
+        span.text-base.font-mono.font-medium.text-stone-600.ml-4.relative.bottom-px.
+          v1.1.0
+
+      #start.pb-4
+      h2(class='font-black border border-stone-200 bg-stone-100 px-2 text-center py-2').
+        Getting Started
+
+      #start-about.pb-8
+      h3.basic.
+        About
+      p.
+        Flame is a data model and query library for Firestore.
+      p.
+        Firestore is a fully managed, internet scale document database offered by Google. Flame was designed to improve clarity and accuracy of Firestore related data model and query code.
+      p.
+        Among other features, Flame makes it easy to define models, write queries and transactions, and page data with cursor based paging. As a bonus, (compared to using firestore-admin directly) using Flame will greatly reduce the amount code in API endpoints and Lambda functions that interact with Firestore.
+      p.
+        If you have any ± feedback, feature requests, or bug reports, please open an issue on Github.
+
+
+      #start-install.pb-8
+      h3.basic.
+        Install
+      p.
+        Install #[code flame-odm] using #[code yarn] or #[code npm].
+      p.
+        At this time, Flame targets node.js and will not work in the browser.
+      p.note.
+        Note: Flame works alongside existing installations of firebase-admin in your project.
+      CodeBlock(
+        ui='{code.start.install.yarn.text}'
+        cp='{code.start.install.yarn.copy}'
+      )
+
+
+      #start-connect.pb-8
+      h3.basic.
+        Connect to Firestore
+      p.
+        The connection to Firestore is defined as part of an !{L('Adapter')}. If you are using Firebase Functions, Flame's default !{L('Adapter')} will connect automatically. The following example shows how to define the connection manually using a service account.
+      p.note.
+        Note: Flame doesn't immediately create a database connection. When queries are run, the Adapter lazily connects to Firestore as needed.
+      CodeBlock(
+        ui='{code.start.connect.coffee.text}'
+        cp='{code.start.connect.coffee.text}'
+        fd=' '
+      )
+
+
+      #start-define.pb-8
+      h3.basic.
+        Define a Model
+      p.
+        Let's create our first !{L('Model')} using the !{L('Adapter')} we just defined.
+      CodeBlock(
+        ui='{code.start.define_model.coffee.text}'
+        cp='{code.start.define_model.coffee.text}'
+        fd=' '
+      )
+
+
+      #start-create.pb-8
+      h3.basic.
+        Create a Record
+      p.
+        Now, we can use our User !{L('Model')} to create a !{L('Record')}.
+      CodeBlock(
+        ui='{code.start.create_record.coffee.text}'
+        cp='{code.start.create_record.coffee.text}'
+        fd=' '
+      )
+
+
+      #start-save.pb-8
+      h3.basic.
+        Save a Document
+      p.
+        Then, we can save the !{L('Record')} we just created as a document to Firestore.
+      CodeBlock(
+        ui='{code.start.save_record.coffee.text}'
+        cp='{code.start.save_record.coffee.text}'
+        fd=' '
+      )
+
+
+      #start-query.pb-8
+      h3.basic.
+        Run a Query
+      p.
+        Finally, we can execute a !{L('Query')} to retrieve the document saved in Firestore.
+      CodeBlock(
+        ui='{code.start.run_query.coffee.text}'
+        cp='{code.start.run_query.coffee.text}'
+        fd=' '
+      )
+
+
+      #api
+      h2.mt-10(class='font-black border border-stone-200 bg-stone-100 px-2 text-center py-2').
+        API Reference
+
+
+      #api-access.pb-8
+      h3.class.
+        Access
+
+
+      #api-access-new.pb-8
+      h4 #[span.text-emerald-600 new] Access(mask)
+      .px-4
+        p.
+          Create an !{L('Access')} that can be used to screen #[code Object]s using a role-basd mask.
+
+
+        h5.
+          Parameters
+        dl
+          dt.
+            mask (Object)
+          dd.
+            An #[code Object] that mirrors #[code defaults] on the target !{L('Model')}, where the value of each field is an #[code Array] of roles allowed to access the given field.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Access)
+          dd.
+            Returns the new !{L('Access')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.access.new.code}'
+          cp='{code.api.access.new.code}'
+          fd=' '
+        )
+
+
+      #api-access-fields.pb-8
+      h4 #[span.font-mono.text-stone-400 Access].fields(roles)
+      .px-4
+        p.
+          List the fields allowed by an !{L('Access')}, given one or more #[code roles].
+
+        h5.
+          Parameters
+        dl
+          dt.
+            roles (Array)
+          dd.
+            The roles used to determine allowed fields.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Array)
+          dd.
+            Returns an array of allowed fields.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.access.fields.code}'
+          cp='{code.api.access.fields.code}'
+          fd=' '
+        )
+
+
+      #api-access-screen.pb-8
+      h4 #[span.text-stone-400 Access].screen(obj, roles)
+      .px-4
+        p.
+          Creates a copy of obj including only role-allowed fields.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            obj (Object)
+          dd.
+            The object to be screened.
+          dt.
+            roles (Array)
+          dd.
+            The roles used to determine allowed fields.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Object)
+          dd.
+            Returns the new, screened object.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.access.screen.code}'
+          cp='{code.api.access.screen.code}'
+          fd=' '
+        )
+
+
+      #api-adapter.pb-8
+      h3.class.
+        Adapter
+
+
+      #api-adapter-new.pb-8
+      h4 #[span.text-emerald-600 new] Adapter(#[em service_account], #[em app_name])
+      .px-4
+        p.
+          Create an !{L('Adapter')} which can be used as a #[code mixin] when creating a !{L('Model')} or !{L('Record')}.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            service_account (Function|Object|String) #[span.optional Optional]
+          dd
+            p.
+              When #[code service_account] is #[code 'firebase-function'] or #[code 'google-cloud'] the service account will be retrieved automatically from the respective platform.
+            p.
+              When #[code service_account] is #[code 'process-env'] Flame will look for the service account as a JSON string stored at #[code process.env.FB_SERVICE_ACCOUNT].
+            p.
+              When #[code service_account] is an #[code Object], Flame assumes the #[code Object] is the service account.
+            p.
+              When #[code service_account] is a #[code Function], Flame will invoke #[code service_account()], which should return a #[code Promise] that resolves to a service account #[code Object].
+            p.
+              When unspecified, Flame will default to using #[code 'firebase-function'].
+            p.note.
+              Note: If you are using Flame in a Firebase Function, you do not need to define or use an !{L('Adapter')}. Flame will automatically use the default !{L('Adapter')} and connect as needed.
+          dt.
+            app_name (String) #[span.optional Optional]
+          dd
+            p.
+              Create multiple !{L('Adapter')}s with different #[code app_name]s to connect to multiple Firestore databases.
+            p.
+              If #[code service_account] is: #[code 'google-cloud'], #[code 'firebase-function'], or #[code null] then #[code app_name] is ignored.
+
+
+
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Adapter)
+          dd.
+            Returns the new !{L('Adapter')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.adapter.new.coffee.text}'
+          cp='{code.api.adapter.new.coffee.text}'
+          fd=' '
+        )
+
+
+      #api-adapter-connect.pb-8
+      h4 #[span.text-stone-400 Adapter].connect()
+      p.note-warn
+        span.flex.items-center.justify-center.pr-4
+          Fa(icon='{faTriangleExclamation}' class='text-pink-400' scale='{1.2}')
+        span.
+          Avoid calling !{L('Adapter.connect()')} directly, it is invoked automatically by !{L('Adapter')}, !{L('Model')}, and !{L('Record')} methods as needed.
+      .px-4
+        p.
+          Connect to Firestore.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Nothing)
+          dd.
+            Returns a Promise that resolves empty.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.adapter.connect.code}'
+          cp='{code.api.adapter.connect.code}'
+          fd=' '
+        )
+
+
+      #api-adapter-transact.pb-8
+      h4 #[span.text-stone-400 Adapter].transact(fn)
+      .px-4
+        p.
+          Executes a set of database operations as a transaction.
+        p.
+          The argument #[code fn] is a Function invoked with one argument: #[code T (Transaction)] which may be passed to any read or write methods carried out within the context of #[code Adatper.transact].
+
+        h5.
+          Parameters
+        dl
+          dt.
+            fn (Function)
+          dd.
+            The Function that wraps the read/write operations to be handled as a transaction.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Any)
+          dd.
+            Returns the return value of #[code fn].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.adapter.transact.code}'
+          cp='{code.api.adapter.transact.code}'
+          fd=' '
+        )
+
+
+      #api-config.pb-8
+      h3.class.
+        Config
+
+
+      #api-config-new.pb-8
+      h4 #[span.text-emerald-600 new] Config(obj)
+      .px-4
+        p.
+          Create a !{L('Config')} which is used to store and pass configuration options to other constructors.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            obj (Object)
+          dd.
+            An #[code Object] of #[code {'{ field: value, ...}'}] entries allowed by the constructor or method that will recieve !{L('Config')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Config)
+          dd.
+            Returns the new !{L('Config')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.config.new.coffee.text}'
+          cp='{code.api.config.new.coffee.text}'
+          fd=' '
+        )
+
+
+      #api-model.pb-8
+      h3.class.
+        Model
+
+
+      #api-model-new.pb-8
+      h4 #[span.text-emerald-600 new] Model(type, defaults, #[em mixins...])
+      .px-4
+        p.
+          Create a !{L('Model')}. A !{L('Model')} defines the structure of the documents to be stored in Firestore.
+
+
+        h5.
+          Parameters
+        dl
+          dt.
+            type (String)
+          dd
+            p.
+              This !{L('Model')}'s type.
+            p.
+              By default, #[code type] will be the collection in Firestore for documents saved by !{L('Record')}s created from this !{L('Model')}. However, the collection can be overriden with a custom !{L('Config')}.
+          dt.
+            defaults (Object)
+          dd
+            p.
+              The structure of your Model defined by an #[code Object] of #[code {'{field: value, ...}'}] entries, where #[code value] can be any of{': '}#[code Array], #[code Boolean], #[code Number], #[code Null], #[code Object], #[code String], or #[code Function].
+            p.
+              When #[code value] is a #[code Function], it will be invoked with two arguments: #[code type] and #[code values] where #[code type] is the !{L('Model')}'s #[code type] and #[code values] is a clone of #[code defaults].
+
+          dt mixins... (Adapter|Config|Serializer|Validator) #[span.optional Optional]
+          dd.
+            For each additional argument passed to the !{L('Model')}'s constructor of  #[code (Type)], the !{L('Model')}'s corresponding default  #[code (Type)] will be overridden.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Model)
+          dd.
+            Returns the new !{L('Model')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.new.coffee.text}'
+          cp='{code.api.model.new.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-count.pb-8
+      h4 #[span.text-stone-400 Model].count(#[em query])
+      .px-4
+        p.
+          Count the number of documents in a collection that satisfy #[code query].
+
+        h5.
+          Parameters
+        dl
+          dt.
+            query #[span.optional Optional]
+          dd.
+            The !{L('Query')} that determines what to count. If #[code query] is not specified, all documents in the collection are counted.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Integer|Null)
+          dd.
+            Returns a #[code Promise] that resolves to the #[code Integer] number of documents in the collection that satisfy #[code query], or #[code Null] if !{L('Model.count()')} fails.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.count.coffee.text}'
+          cp='{code.api.model.count.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-create.pb-8
+      h4 #[span.text-stone-400 Model].create(values, #[em mixins...])
+      .px-4
+        p.
+          Create a new !{L('Record')}.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            values (Object)
+          dd.
+            An #[code Object] of the #[code values] for !{L('Record')}. #[code values] will be merged with the !{L('Model')}'s #[code defaults].
+          dt.
+            mixins... (Adapter|Config|Serializer|Validator) #[span.optional Optional]
+          dd.
+            For each additional argument passed to !{L('Model.create()')} of #[code (Type)], the created !{L('Record')}'s corresponding default #[code (Type)] will be overridden.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Record)
+          dd.
+            Returns the new !{L('Record')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.create.coffee.text}'
+          cp='{code.api.model.create.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-del.pb-8
+      h4 #[span.text-stone-400 Model].del(id, #[em T])
+      p.note-warn
+        span.flex.items-center.justify-center.pr-4
+          Fa(icon='{faTriangleExclamation}' class='text-pink-400' scale='{1.2}')
+        span.
+          !{L('Model.del()')} requires a !{L('Config')} with a #[code deleted_field]. When a #[code deleted_at_field] is also configured, it is set using the !{L('Model')}'s #[code updated_at] generator.
+      .px-4
+        p.
+          Soft delete a single document from a collection. Rather than removing the document, !{L('Model.del()')} sets the document's #[code deleted] field to #[code true] and its #[code deleted_at] field to the current time. The document's #[code updated_at] field is not modified.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            id (String)
+          dd.
+            The document ID.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Model.del()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Boolean)
+          dd.
+            Returns #[code true] if successful, otherwise #[code false].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.del.coffee.text}'
+          cp='{code.api.model.del.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-extend.pb-8
+      h4 #[span.text-stone-400 Model].extend(type, defaults, #[em mixins...])
+      .px-4
+        p.
+          Extend a !{L('Model')}.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            type (String)
+          dd
+            p.
+              This !{L('Model')}'s type.
+            p.
+              By default #[code type] will be the collection used in Firestore when saving a !{L('Record')}. However, the collection can be overriden with a custom !{L('Config')}.
+          dt.
+            defaults (Object)
+          dd
+            p.
+              The structure of your !{L('Model')} defined by an #[code Object] of #[code {'{field: value, ...}'}] entries, where #[code value] can be any of{': '}#[code Array], #[code Boolean], #[code Number], #[code Null], #[code Object], #[code String], or #[code Function]. #[code defaults] will be merged with the extended !{L('Model')}'s #[code defaults].
+            p.
+              When #[code value] is a #[code Function], it will be invoked with two arguments: #[code type] and #[code values] where #[code type] is the !{L('Model')}'s #[code type] and #[code values] is a clone of #[code defaults].
+          dt.
+            mixins... (Adapter|Config|Serializer|Validator) #[span.optional Optional]
+          dd.
+            For each additional argument passed to the !{L('Model')}'s constructor of #[code (Type)], the !{L('Model')}'s corresponding default #[code (Type)] will be overridden.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Model)
+          dd.
+            Returns the new !{L('Model')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.extend.coffee.text}'
+          cp='{code.api.model.extend.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-find.pb-8
+      h4 #[span.text-stone-400 Model].find(query, #[em fields], #[em T])
+      .px-4
+        p.
+          Retrieve the first document in a collection that satisfies #[code query].
+
+        h5.
+          Parameters
+        dl
+          dt.
+            query #[span.optional Optional]
+          dd.
+            The !{L('Query')} that determines what documents are elliglbe. If #[code query] is not specified, the first document in the collection is returned
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned document. If unspecified or #[code Null] all fields are returned.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Model.find()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Object|Null)
+          dd.
+            Returns the return the document #[code Object], or #[code Null] if there is no match.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.find.coffee.text}'
+          cp='{code.api.model.find.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-find-all.pb-8
+      h4 #[span.text-stone-400 Model].findAll(query, #[em fields], #[em T])
+      .px-4
+        p.
+          Retrieve all documents in a collection that satisfy #[code query].
+
+        h5.
+          Parameters
+        dl
+          dt.
+            query #[span.optional Optional]
+          dd.
+            The !{L('Query')} that determines what documents will be included. If #[code query] is not specified, all documents in the collection will be included.
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned documents. If unspecified or #[code Null] all fields are returned.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Model.findAll()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Array|Null)
+          dd.
+            Returns an array of matching document Objects, or #[code Null] if there are no matches.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.find_all.coffee.text}'
+          cp='{code.api.model.find_all.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-fragment.pb-8
+      h4 #[span.text-stone-400 Model].fragment(id, values, #[em mixins...])
+      .px-4
+        p.
+          Create a partial !{L('Record')} using an existing document ID.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            id (String)
+          dd.
+            The the document ID
+          dt.
+            values (Object)
+          dd.
+            An #[code Object] of the #[code values] for !{L('Record')}. #[code values] will be merged with the !{L('Model')}'s #[code defaults].
+          dt.
+            mixins... (Adapter|Config|Serializer|Validator) #[span.optional Optional]
+          dd.
+            For each additional argument passed to !{L('Model.fragment()')} of #[code (Type)], the created !{L('Record')}'s corresponding default #[code (Type)] will be overridden.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Record)
+          dd.
+            Returns the new !{L('Record')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.fragment.coffee.text}'
+          cp='{code.api.model.fragment.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-get.pb-8
+      h4 #[span.text-stone-400 Model].get(id, #[em fields], #[em T])
+      .px-4
+        p.
+          Retrieve a single document from a collection.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            id (String)
+          dd.
+            The document ID.
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned document. If unspecified or #[code Null] all fields are returned.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Model.get()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Object|Null)
+          dd.
+            Returns the !{L('Record')} #[code Object], or #[code Null] if there is no document with the given #[code id].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.get.coffee.text}'
+          cp='{code.api.model.get.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-get-all.pb-8
+      h4 #[span.text-stone-400 Model].getAll(ids, #[em fields])
+      .px-4
+        p.
+          Retreive multiple documents from a collection.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            ids (Array&lt;String&gt;)
+          dd.
+            The document IDs of the documents to retrieve.
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned documents. If unspecified or #[code Null] all fields are returned.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Array&lt;Object|Null&gt;|Null)
+          dd.
+            Returns an #[code Array] aligned with #[code ids], where each element is the document #[code Object], or #[code Null] for any #[code id] that has no document in Firestore.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.get_all.coffee.text}'
+          cp='{code.api.model.get_all.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-page.pb-8
+      h4 #[span.text-stone-400 Model].page(pager, #[em cursor, fields, T])
+      .px-4
+        p.
+          Retrieve a page of documents from a collection.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            pager (Pager)
+          dd.
+            The !{L('Pager')} to use.
+          dt.
+            cursor (Object) #[span.optional Optional]
+          dd
+            p.
+              An #[code Object] that defines the current cursor and it's position.
+            p.
+              When unspecified or #[code Null], #[code cursor] defaults to the first document in the collection that satisfies #[code pager].
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned documents. If unspecified or #[code Null] all fields are returned.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Model.page()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Object|Null)
+          dd.
+            Returns a page #[code Object], or #[code Null] if there are no documents that satisfy the supplied #[code pager] and #[code cursor].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.page.coffee.text}'
+          cp='{code.api.model.page.coffee.text}'
+          fd=' '
+        )
+
+      #api-model-traverse.pb-8
+      h4 #[span.text-stone-400 Model].traverse(pager, fn, #[em fields])
+      .px-4
+        p.
+          Traverse all documents in a collection that satisify the constraints of #[code pager]. #[code fn] is invoked once with each record as its first argument.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            pager (Pager)
+          dd
+            p.
+              The !{L('Pager')} to use. When !{L('Pager')} is initalized with #[code &#123; size: 1 &#125;], each invocation of #[code fn] will be in serial. Otherwise, #[code fn] will be invoked on all records in a given page in parallel.
+            p.
+              Use #[code size] as a rate-limiter to ensure !{L('Model.traverse()')} doesn't exceed read or write limits.
+          dt.
+            fn (Function)
+          dd.
+            The #[code Function] invoked once for each record, with the record as its first argument.
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields that should be included in the returned documents. If unspecified or #[code Null] all fields are returned.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Nothing)
+          dd.
+            Returns a #[code Promise] that resolves empty once every matching record has been traversed.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.model.traverse.coffee.text}'
+          cp='{code.api.model.traverse.coffee.text}'
+          fd=' '
+        )
+
+      #api-pager.pb-8
+      h3.class.
+        Pager
+
+      #api-pager-new.pb-8
+      h4 #[span.text-emerald-600 new] Pager(q, #[em opts])
+      .px-4
+        p.
+          Creates a !{L('Pager')} that can be used to in combination with !{L('Model.page()')} to retrieve cursor-based pages from a collection in Firestore.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            q (Array&lt;Array&gt;)
+          dd
+            p.
+              An #[code Array] of constraint tuples that defines what documents are included when retrieving a page using this !{L('Pager')} in combination with !{L('Model.page()')}. Each constraint tuple is represented using an #[code Array] in the form #[code &#91;constraint, field, value(s)&#93;].
+            p.
+              The allowed constraint tuples are:
+
+            .overflow-x-scroll.border.border-stone-200.p-1.bg-stone-50
+              table.table-auto.border-collapse.text-sm.w-full
+                thead.bg-stone-100
+                  tr
+                    //- th.mx-2.border.border-stone-200.font-medium
+                    th.px-2.py-1.border.border-stone-200.font-medium.text-left(colspan='3') Constraint Tuples
+                tbody.bg-white
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'and']
+                    td.px-2.py-1.border.border-stone-200(colspan='2') #[code.text-purple-900 One or more 'eq', 'eq-any', 'gt', 'gte', 'includes', 'includes-any', 'lt', 'lte', 'not-eq', 'not-eq-any' constraint tuples.]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'or']
+                    td.px-2.py-1.border.border-stone-200(colspan='2') #[code.text-purple-900 One or more 'eq', 'eq-any', 'gt', 'gte', 'includes', 'includes-any', 'lt', 'lte', 'not-eq', 'not-eq-any' constraint tuples.]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'eq']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'eq-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'gt']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'gte']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'includes']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'includes-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'lt']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'lte']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'not-eq']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'not-eq-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'order-by']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value (String)]
+
+          dt.
+            opts (Object)
+          dd.
+            An #[code Object] of the form #[code &#123; size: value (Integer) &#125;] where #[code value] is the number of documents per page.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Pager)
+          dd.
+            Returns the new !{L('Pager')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.pager.new.coffee.text}'
+          cp='{code.api.pager.new.coffee.text}'
+          fd=' '
+        )
+
+      #api-query.pb-8
+      h3.class.
+        Query
+
+      #api-query-new.pb-8
+      h4 #[span.text-emerald-600 new] Query(q, #[em serializer])
+      .px-4
+        p.
+          Create a !{L('Query')} that can be used with !{L('Model.count()')}, !{L('Model.find()')}, and !{L('Model.findAll()')} to count and retrieve documents from Firestore.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            q (Array&lt;Array&gt;)
+          dd
+            p.
+              An #[code Array] of constraint tuples that defines what documents are included when using this !{L('Query')} in combination with !{L('Model.count()')}, !{L('Model.find()')}, or !{L('Model.findAll()')}. Each constraint tuple is represented using an #[code Array] in the form #[code &#91;constraint, field, value(s)&#93;] or #[code &#91;constraint, value(s)&#93;].
+            p.
+              The allowed constraint tuples are:
+
+            .overflow-x-scroll.border.border-stone-200.p-1.bg-stone-50
+              table.table-auto.border-collapse.text-sm.w-full
+                thead.bg-stone-100
+                  tr
+                    //- th.mx-2.border.border-stone-200.font-medium
+                    th.px-2.py-1.border.border-stone-200.font-medium.text-left(colspan='3') Constraint Tuples
+                tbody.bg-white
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'and']
+                    td.px-2.py-1.border.border-stone-200(colspan='2') #[code.text-purple-900 One or more 'eq', 'eq-any', 'gt', 'gte', 'includes', 'includes-any', 'lt', 'lte', 'not-eq', 'not-eq-any' constraint tuples.]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'or']
+                    td.px-2.py-1.border.border-stone-200(colspan='2') #[code.text-purple-900 One or more 'eq', 'eq-any', 'gt', 'gte', 'includes', 'includes-any', 'lt', 'lte', 'not-eq', 'not-eq-any' constraint tuples.]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'eq']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'eq-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'gt']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'gte']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'includes']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'includes-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'limit']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap(colspan='2') #[code.text-purple-900 value (Integer)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'lt']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'lte']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'not-eq']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value&nbsp;&nbsp;(Array|Boolean|Number|Null|Object|String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'not-eq-any']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 values (Array&lt;Array|Boolean|Number|Null|Object|String&gt;)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'order-by']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 field (String)]
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-purple-900 value (String)]
+                  tr
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap #[code.text-lime-600 'start-at']
+                    td.px-2.py-1.border.border-stone-200.whitespace-nowrap(colspan='2') #[code.text-purple-900 value (Array&lt;Strings&gt;)]
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Query)
+          dd.
+            Returns the new !{L('Query')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.query.new.coffee.text}'
+          cp='{code.api.query.new.coffee.text}'
+          fd=' '
+        )
+
+      #api-record.pb-8
+      h3.class.
+        Record
+
+
+      #api-record-destroy.pb-8
+      h4 #[span.text-stone-400 Record].destroy(#[em T])
+      .px-4
+        p.
+          Permanently removes the document represented by this !{L('Record')} from Firestore.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Record.destroy()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Boolean|Null)
+          dd.
+            Returns the #[code true] if successful, otherwise #[code false].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.destroy.coffee.text}'
+          cp='{code.api.record.destroy.coffee.text}'
+          fd=' '
+        )
+
+      #api-record-errors.pb-8
+      h4 #[span.text-stone-400 Record].errors(#[em fields])
+      .px-4
+        p.
+          Produces an #[code Object] of the !{L('Record')}'s fields that are not valid.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            An #[code Array] of fields to validate. When unspecified or #[code Null] all fields are validated.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Object)
+          dd.
+            An #[code Object] in the form of #[code &#123; field: value (Boolean), ... &#125;] where each #[code field] is a field in the !{L('Record')}, and each #[code value] is #[code true] if the #[code field] fails this !{L('Record')}'s corresponding !{L('Validator')} function.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.errors.coffee.text}'
+          cp='{code.api.record.errors.coffee.text}'
+          fd=' '
+        )
+
+      #api-record-obj.pb-8
+      h4 #[span.text-stone-400 Record].obj()
+      .px-4
+        p.
+          Produces the #[code Object] representation of this !{L('Record')}'s fields and values.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Object)
+          dd.
+            Returns the !{L('Record')}'s as an #[code Object].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.obj.coffee.text}'
+          cp='{code.api.record.obj.coffee.text}'
+          fd=' '
+        )
+
+      #api-record-ok.pb-8
+      h4 #[span.text-stone-400 Record].ok(#[em fields])
+      .px-4
+        p.
+          Check if all #[code fields] of the !{L('Record')} are valid.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            fields (Array&lt;String&gt;) #[span.optional Optional]
+          dd.
+            The fields to check, if unspecified or #[code Null] all fields are checked.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Boolean)
+          dd.
+            Returns #[code true] if all fields are valid, otherwise #[code false].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.ok.coffee.text}'
+          cp='{code.api.record.ok.coffee.text}'
+          fd=' '
+        )
+
+      #api-record-save.pb-8
+      h4 #[span.text-stone-400 Record].save(#[em T])
+      .px-4
+        p.
+          Save this !{L('Record')} to Firestore as a document. When an #[code updated_at_field] is set in this !{L('Record')}'s corresponding !{L('Config')}, it is set using the !{L('Model')}'s #[code updated_at] generator.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Record.save()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Boolean)
+          dd.
+            Returns #[code true] when successful, otherwise #[code false].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.save.coffee.text}'
+          cp='{code.api.record.save.coffee.text}'
+          fd=' '
+        )
+
+      #api-record-update.pb-8
+      h4 #[span.text-stone-400 Record].update(fields, #[em T])
+      .px-4
+        p.
+          Update this !{L('Record')}'s corresponding document in Firestore. When an #[code updated_at_field] is set in this !{L('Record')}'s corresponding !{L('Config')}, it is set using the !{L('Model')}'s #[code updated_at] generator.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            fields (Array&lt;String&gt;)
+          dd.
+            The fields to update in this !{L('Record')}'s document in Firestore.
+          dt.
+            T (Transaction) #[span.optional Optional]
+          dd.
+            A Firestore transaction #[code Object]. Use when invoking !{L('Record.update()')} within the context of !{L('Adapter.transact()')}.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Promise → Boolean)
+          dd.
+            Returns #[code true] when successful, otherwise #[code false].
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.record.update.coffee.text}'
+          cp='{code.api.record.update.coffee.text}'
+          fd=' '
+        )
+
+      #api-serializer.pb-8
+      h3.class.
+        Serializer
+
+      #api-serializer-new.pb-8
+      h4 #[span.text-emerald-600 new] Serializer(opts)
+      .px-4
+        p.
+          Create a !{L('Serializer')} that can be used to transform !{L('Record')} #[code Object] format into a Firestore document #[code Object] format, and vice-a-versa.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            opts (Object)
+          dd
+            p.
+              #[code opts] is an #[code Object] with three allowed fields: #[code prefixes], #[code separator], and #[code fmt].
+            p.
+              #[code prefixes] is an #[code Array] of prefixes that can be used to create 2-level !{L('Record')}s that will be automatically flattened by Flame as they are written to Firestore, and documents retrieved from Firestore will automatically be expanded back into 2-level #[code Objects].
+            p.
+              #[code separator] is used as field concatenator between the #[code prefixes] and the 2nd-level field names for 2-level !{L('Record')}s stored in Firestore.
+            p.
+              #[code fmt] normalizes the casing for field names when in Firestore, and as #[code Objects]. Snake, kebabk, pascal, and camel cases are supported.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Serializer)
+          dd.
+            Returns the new !{L('Serializer')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.serializer.new.coffee.text}'
+          cp='{code.api.serializer.new.coffee.text}'
+          fd=' '
+        )
+
+
+      #api-validator.pb-8
+      h3.class.
+        Validator
+
+      #api-validator-new.pb-8
+      h4 #[span.text-emerald-600 new] Validator(v)
+      .px-4
+        p.
+          Create a !{L('Validator')} that can be used to check if a !{L('Record')}'s fields are valid.
+
+        h5.
+          Parameters
+        dl
+          dt.
+            v (Object)
+          dd
+            p.
+              An #[code Object] of the form #[code &#123; field: validator &#125;] that mirrors the structure of the target !{L('Model')}, where the validator of each field is a #[code Function].
+            p.
+              Each #[code validator] is invoked with two arguments, #[code value] and #[code object]. #[code value] is the !{L('Record')}'s corresponding #[code field] value, and #[code object] is the full #[code Object] representation of the !{L('Record')}.
+            p.
+              Each #[code validator] should evaluate #[code true] if valid, #[code false] otherwise.
+
+        h5.
+          Returns
+        dl
+          dt.
+            value (Validator)
+          dd.
+            Returns the new !{L('Validator')}.
+
+        h5.
+          Example
+        CodeBlock(
+          ui='{code.api.validator.new.coffee.text}'
+          cp='{code.api.validator.new.coffee.text}'
+          fd=' '
+        )
+
+
+  div

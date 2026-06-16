@@ -1,0 +1,36 @@
+.flex.flex-col.bg-white.shadow-sm.border.border-stone-600.rounded-md.overflow-hidden.text-sm.mt-4.mb-8
+  .flex.flex-row.justify-between.border-b.border-stone-500.font-semibold(class='h-[36px] bg-stone-700 text-stone-300')
+    +if('fd && fd == " "')
+      p.inline-flex.items-center(class='px-2 py-1.5')
+        Fa(fw icon='{faFile}' scale='{1.1}')/
+        span.font-mono(class='ml-[1px]') {fd}
+    +if('fd && fd != " "')
+      p.inline-flex.items-center(class='px-2 py-1.5')
+        Fa(fw icon='{faFolder}' scale='{1.1}')/
+        span.font-mono(class='ml-[1px]') {fd}
+    +if('!fd')
+      p.inline-flex.items-center(class='px-2 py-2')
+        span.inline-flex.justify-center.items-center.bg-stone-300.text-black.rounded(class='px-[4px] py-[4px]')
+          Fa(fw icon='{faTerminal}' size='xs' scale='{.8}')/
+  button(
+    use:copy='{cp}'
+    class='relative rounded group text-left'
+    on:click='{copyToast}'
+  )
+    .flex.w-full.pr-4(class='bg-[#1c1b1b]')
+      Highlight(class='w-full' language='{coffeescript}' code='{ui}' wrapLines=true 'let:highlighted')
+        LineNumbers(
+          {highlighted},
+          wrapLines,
+          hideBorder,
+          --line-number-color="#1b1917",
+          --border-color="#1b1917",
+          --padding-left="0px",
+          --padding-right="0px",
+        )/
+    .absolute.right-0.top-0.bottom-0.left-0.border.border-dashed.border-stone-900(
+      class='group-hover:border-amber-600 group-hover:cursor-pointer z-10'
+      class='flex justify-end rounded m-1.5'
+    )
+      .p-1
+        Fa(fw icon='{faCopy}' class='text-amber-700 group-hover:text-amber-600')/

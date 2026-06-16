@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 14px;
+  }
+
+  .brand {
+    font-family: 'Stylish', sans-serif;
+  }
+
+  .logo {
+    background-image: url('data:image/svg+xml,<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path id="Path" fill="%23ff9400" fill-rule="evenodd" stroke="none" d="M 568.677673 126.494507 C 556.17865 104.369202 525.350708 104.152466 512.10907 126.494507 L 230.680603 620.054993 C 220.955246 635.298279 212.126251 657.261353 230.680603 676.623535 L 512.10907 958.052002 C 527.729919 973.672852 553.056824 973.672852 568.677612 958.052002 L 850.10614 676.623535 C 870.586426 654.271057 855.959656 630.139099 850.10614 620.054993 Z"/><path id="Rounded-Rectangle" fill="%23ffc000" fill-rule="evenodd" stroke="none" d="M 486 807 C 515.546997 836.546997 563.453003 836.546997 593 807 L 630 770 C 659.546997 740.453003 659.546997 692.546997 630 663 L 593 626 C 563.453003 596.453003 515.546997 596.453003 486 626 L 449 663 C 419.453003 692.546997 419.453003 740.453003 449 770 Z"/></svg>');
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+
+  .logo.hero {
+    height: 160px;
+    width: 160px;
+  }
+
+  .grid-bg {
+    background-image: repeating-linear-gradient(90deg, hsla(196,0%,79%,0.25) 0px, hsla(196,0%,79%,0.25) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.25) 0px, hsla(196,0%,79%,0.25) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.1) 0px, hsla(196,0%,79%,0.1) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(90deg, hsla(196,0%,79%,0.1) 0px, hsla(196,0%,79%,0.1) 1px,transparent 1px, transparent 12px),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+    background-attachment: local;
+  }
+
+  .hljs.hideBorder {
+    width: 0px !important;
+    margin: 0px 0px 0px 0px !important;
+    padding: 2px 8px 2px 8px !important;
+    border: none !important;
+  }
+  .hljs.hideBorder > code {
+    display: none;
+  }
+
+}
+
+@layer components {
+
+
+  .nav-link-section {
+    @apply p-0;
+  }
+  .note {
+    @apply font-light italic text-stone-600;
+  }
+  .note-warn {
+    @apply grid grid-cols-[auto,1fr] text-stone-600 bg-pink-50 px-4 rounded-md py-2;
+  }
+
+  .docs > p {
+    @apply my-2;
+  }
+
+  .docs h3.basic {
+    @apply font-bold mb-2;
+  }
+  .docs h3.class {
+    @apply bg-orange-100 border border-orange-300 font-semibold font-mono px-4 py-2;
+  }
+  .docs h4 {
+    @apply border border-orange-200 bg-orange-50 font-mono mb-4 px-4 py-2;
+  }
+  .docs h5 {
+    @apply font-medium mb-1 mt-8 text-[0.8125rem] uppercase;
+  }
+  .docs dd > code,
+  .docs p > code,
+  .docs span > code {
+    @apply bg-stone-100 font-mono inline not-italic pb-[1px] pt-px px-[2px] rounded-sm text-[0.9375rem];
+  }
+  .docs dd > a > code,
+  .docs p > a > code,
+  .docs span > a > code {
+    @apply bg-orange-50 font-mono hover:bg-orange-100 hover:cursor-pointer inline pb-[1px] pt-px px-[2px] text-[0.9375rem];
+  }
+  .docs em {
+    @apply italic;
+  }
+  .docs dl {
+    @apply md:ml-4;
+  }
+  .docs dt {
+    @apply font-medium font-mono rounded-sm text-[0.9375rem] text-purple-600;
+  }
+  .docs dt:first-child {
+    @apply mt-4;
+  }
+  .docs dt .optional {
+    @apply text-stone-500 px-1 text-sm uppercase;
+  }
+  .docs dd {
+    @apply mt-2 mb-6 space-y-2;
+  }
+
+}
