@@ -69,9 +69,14 @@ describe 'FirestoreErrors --', ->
     (assert (fe.index_url { code: 9, message: 'precondition failed' }) == null)
     return
 
-  it 'index_url returns null when the code is not FAILED_PRECONDITION.', ->
-    err = { code: 5, message: 'see https://console.firebase.google.com/whatever' }
-    (assert (fe.index_url err) == null)
+  it 'index_url extracts the url regardless of grpc code (firestore tags missing-index as INVALID_ARGUMENT too).', ->
+    url = 'https://console.firebase.google.com/v1/r/project/p/firestore/indexes?create_composite=q'
+    err = { code: 3, message: "The query requires an index. You can create it here: #{url}" }
+    (assert (fe.index_url err) == url)
+    return
+
+  it 'index_url returns null when there is no url in the message.', ->
+    (assert (fe.index_url { code: 3, message: 'invalid argument' }) == null)
     return
 
   it 'print writes a single compact model.method → WORD line.', ->
@@ -80,11 +85,11 @@ describe 'FirestoreErrors --', ->
     (assert (out[0] == '[flame-odm] users.save → ALREADY_EXISTS'))
     return
 
-  it 'print appends the create-index url for an index error.', ->
+  it 'print relabels an index error MISSING_INDEX and appends the create-index url.', ->
     url = 'https://console.firebase.google.com/v1/r/project/p/firestore/indexes?create_composite=z'
-    err = { code: 9, message: "create it here: #{url}" }
+    err = { code: 3, message: "create it here: #{url}" }
     out = (capture -> (fe.print err, { model: 'posts', method: 'findAll' }))
-    (assert (out[0] == "[flame-odm] posts.findAll → FAILED_PRECONDITION — create index: #{url}"))
+    (assert (out[0] == "[flame-odm] posts.findAll → MISSING_INDEX — create index: #{url}"))
     return
 
   it 'print falls back to ? for missing context.', ->

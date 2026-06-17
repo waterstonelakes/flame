@@ -41,7 +41,6 @@ class FirestoreErrors
 
 
   index_url: (err) ->
-    return null unless (get err, 'code') == 9
     matches = ((get err, 'message', '').match /https:\/\/console\.(?:firebase|cloud)\.google\.com\/\S+/)
     (first matches) ? null
 
@@ -50,7 +49,8 @@ class FirestoreErrors
     model  = (get context, 'model', '?')
     method = (get context, 'method', '?')
     url    = (@.index_url err)
-    line   = "[flame-odm] #{model}.#{method} → #{(@.word err)}"
+    word   = if url then 'MISSING_INDEX' else (@.word err)
+    line   = "[flame-odm] #{model}.#{method} → #{word}"
     line   = "#{line} — create index: #{url}" if url
     (console.error line)
     return
