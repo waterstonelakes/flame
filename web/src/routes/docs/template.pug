@@ -1322,7 +1322,7 @@ div(class='sm:grid sm:grid-cols-[auto,auto]')
       h4 #[span.text-stone-400 Record].save(#[em T])
       .px-4
         p.
-          Save this !{L('Record')} to Firestore as a document. When an #[code updated_at_field] is set in this !{L('Record')}'s corresponding !{L('Config')}, it is set using the !{L('Model')}'s #[code updated_at] generator.
+          Save this !{L('Record')} to Firestore as a document.
 
         h5.
           Parameters
@@ -1353,6 +1353,9 @@ div(class='sm:grid sm:grid-cols-[auto,auto]')
       .px-4
         p.
           Update this !{L('Record')}'s corresponding document in Firestore. When an #[code updated_at_field] is set in this !{L('Record')}'s corresponding !{L('Config')}, it is set using the !{L('Model')}'s #[code updated_at] generator.
+
+        p.
+          Note: if a !{L('Record')} is constructed with a value for the field named by the !{L('Config')}'s #[code updated_at_field], and that same field name is passed in #[code fields], the passed value overrides the default #[code updated_at] behavior and is written as-is.
 
         h5.
           Parameters
